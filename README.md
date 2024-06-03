@@ -4,6 +4,7 @@
 Neural Network made using ONLY Linear Algebra + Numpy.
 <br/>Uses the Digit Recognizer dataset (https://www.kaggle.com/competitions/digit-recognizer).
 <br/>Trains a Neural Network to recognize digits.
+<br/>To view the Linear Algebra behind this project, check `NN Math.jpg`
 
 ### Usage
 1. Make sure the following dependancies are installed with `pip install` :
