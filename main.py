@@ -86,7 +86,7 @@ def gradient_descent(X, Y, iter, a):
     return W1, W2, b1, b2
 
 # Run
-iterations = 1000
+iterations = 5000
 alpha = 0.001
 W1, W2, b1, b2 = gradient_descent(X_train, Y_train, iterations, alpha) # way better results with lower alpha & higher iterations
 
