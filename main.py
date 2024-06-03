@@ -19,14 +19,14 @@ Y_train = data_train[0]
 
 # Def functions
 def init_parameters():
-    W1 = np.random.rand(10, 784)
-    b1 = np.random.rand(10, 1)
-    W2 = np.random.rand(10, 10)
-    b2 = np.random.rand(10, 1)
+    W1 = np.random.randn(10, 784) * np.sqrt(2 / 784)
+    b1 = np.zeros((10, 1))
+    W2 = np.random.randn(10, 10) * np.sqrt(2 / 10)
+    b2 = np.zeros((10, 1))
     return W1, W2, b1, b2
 
-def ReLU(x):
-    return np.maximum(0, x) # really easy way to do ReLU
+def LeakyReLU(x, alpha=0.01):
+    return np.where(x > 0, x, x * alpha) # fix ReLU
 
 def softmax(x):
     x -= np.max(x, axis=0)  # subtract max value for numerical stability
@@ -35,7 +35,7 @@ def softmax(x):
     
 def forward_propagation(W1, W2, b1, b2, X):
     Z1 = W1.dot(X) + b1
-    A1 = ReLU(Z1)
+    A1 = LeakyReLU(Z1)
     Z2 = W2.dot(A1) + b2
     A2 = softmax(Z2)
     return Z1, Z2, A1, A2
@@ -46,18 +46,18 @@ def one_hot(Y):
     OH_Y = OH_Y.T # from each row being example to each col being example; following math
     return OH_Y
 
-def dx_ReLU(Z):
-    return Z > 0 # will ret 1 or 0 depending on true||false
+def dx_LeakyReLU(Z, alpha=0.01):
+    return np.where(Z > 0, 1, alpha) # fix dx_ReLU
     
 def backwards_propagation(Z1, Z2, A1, A2, W2, X, Y):
     m = Y.size
     OH_Y = one_hot(Y)
-    dZ2 = 2*(A2 - OH_Y)
+    dZ2 = A2 - OH_Y
     dW2 = 1 / m * dZ2.dot(A1.T)
-    db2 = 1 / m * np.sum(dZ2)
-    dZ1 = W2.T.dot(dZ2) * dx_ReLU(Z1) # derive activation func using prev. method
+    db2 = 1 / m * np.sum(dZ2, axis=1, keepdims=True)
+    dZ1 = W2.T.dot(dZ2) * dx_LeakyReLU(Z1)
     dW1 = 1 / m * dZ1.dot(X.T)
-    db1 = 1 / m * np.sum(dZ1)
+    db1 = 1 / m * np.sum(dZ1, axis=1, keepdims=True)
     return dW1, dW2, db1, db2
 
 def update_parameters(W1, W2, b1, b2, dW1, dW2, db1, db2, a): # a = alpha
@@ -86,7 +86,7 @@ def gradient_descent(X, Y, iter, a):
     return W1, W2, b1, b2
 
 # Run
-W1, W2, b1, b2 = gradient_descent(X_train, Y_train, 100, 0.10)
+W1, W2, b1, b2 = gradient_descent(X_train, Y_train, 500, 0.001) # way better results with lower alpha & more iterations
 
 # Test
 def make_predictions(X, W1, W2, b1, b2):
