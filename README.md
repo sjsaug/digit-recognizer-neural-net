@@ -12,7 +12,7 @@ Neural Network made using ONLY Linear Algebra + Numpy.
     - pandas
     - matplotlib
 2. Specify your desired training iterations and alpha (default is **(5000, 0.001)**).
-    - *NOTE : Recommended to only change iterations. Higher accuracy will require more iterations exponentially. <br/>With 1k iterations we get 74% accuracy | 5k iterations we get 87% accuracy*
+    - *NOTE : Recommended to only change iterations. Higher accuracy will require more iterations exponentially. <br/>With 1k iterations we get 74% accuracy | 5k iterations we get 87% accuracy | 10k iterations we get 89% accuracy <br/>For 99%+ accuracy we would likely need anywhere from 300k-1M+ iterations*
 3. To start training, run `python3 main.py` in your project directory.
 4. Done! Project will auto test after training is complete.
 
