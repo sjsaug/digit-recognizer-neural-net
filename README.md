@@ -18,9 +18,10 @@ Neural Network made using ONLY Linear Algebra + Numpy.
 
 ### Benchmarks
 System 1 (Laptop) : M2 Pro MBP (Base Config 16GB RAM)
-System 2 (SFF Desktop) : Watercooled 5700X3D + 3090 + 64GB DDR4 3600
-System 1 gets around 10 iterations per second, slowing down to 10 iterations per 1.5 seconds after the first 100 iterations. Noticeable tempeature increase as iterations increase which explains the performance decrease.
-System 2 gets around 10 iterations per 1.2 seconds, not slowing down (measured up until 2.5k iterations). Temperature remained the same which explains the consistency - would be interesting to test this with a 5950X or Threadripper.
+- System 1 gets around 10 iterations per second, slowing down to 10 iterations per 1.5 seconds after the first 100 iterations. Noticeable tempeature increase as iterations increase which explains the performance decrease.
+
+<br/>System 2 (SFF Desktop) : Watercooled 5700X3D + 3090 + 64GB DDR4 3600
+- System 2 gets around 10 iterations per 1.2 seconds, not slowing down (measured up until 2.5k iterations). Temperature remained the same which explains the consistency - would be interesting to test this with a 5950X or Threadripper.
 
 ### Contribution Opportunities
 Here are just a few things that can be contributed to improve the project :
