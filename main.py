@@ -91,12 +91,12 @@ def read_config():
 	config.read("./nn.cfg")
 	parameters = dict(config.items("Parameters"))
 	return {
-		"ITERATIONS": int(parameters["iterations"]), 
-		"ALPHA": float(parameters["alpha"])
+		"ITERATIONS": parameters["iterations"], 
+		"ALPHA": parameters["alpha"]
 		}
 
 # Run
-W1, W2, b1, b2 = gradient_descent(X_train, Y_train, read_config()["ITERATIONS"], read_config()["ALPHA"])
+W1, W2, b1, b2 = gradient_descent(X_train, Y_train, int(read_config()["ITERATIONS"]), float(read_config()["ALPHA"]))
 
 # Test
 def make_predictions(X, W1, W2, b1, b2):
