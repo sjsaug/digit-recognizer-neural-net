@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
+import configparser
 
 data = pd.read_csv('data/train.csv')
 data.head()
@@ -85,10 +86,17 @@ def gradient_descent(X, Y, iter, a):
             print(f"Accuracy : {get_accuracy(get_predictions(A2), Y)}")
     return W1, W2, b1, b2
 
+
+def read_config():
+	config = configparser.RawConfigParser()
+	config.read("./nn.cfg")
+	parameters = dict(config.items("Parameters"))
+	return {
+		"ITERATIONS": parameters["iterations"], 
+		"ALPHA": parameters["alpha"]
+		}
 # Run
-iterations = 5000
-alpha = 0.001
-W1, W2, b1, b2 = gradient_descent(X_train, Y_train, iterations, alpha) # way better results with lower alpha & higher iterations
+W1, W2, b1, b2 = gradient_descent(X_train, Y_train, int(read_config()["ITERATIONS"]), float(read_config()["ALPHA"])) # way better results with lower alpha & higher iterations
 
 # Test
 def make_predictions(X, W1, W2, b1, b2):
