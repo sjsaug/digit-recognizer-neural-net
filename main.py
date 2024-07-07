@@ -86,17 +86,17 @@ def gradient_descent(X, Y, iter, a):
             print(f"Accuracy : {get_accuracy(get_predictions(A2), Y)}")
     return W1, W2, b1, b2
 
-
 def read_config():
 	config = configparser.RawConfigParser()
 	config.read("./nn.cfg")
 	parameters = dict(config.items("Parameters"))
 	return {
-		"ITERATIONS": parameters["iterations"], 
-		"ALPHA": parameters["alpha"]
+		"ITERATIONS": int(parameters["iterations"]), 
+		"ALPHA": float(parameters["alpha"])
 		}
+
 # Run
-W1, W2, b1, b2 = gradient_descent(X_train, Y_train, int(read_config()["ITERATIONS"]), float(read_config()["ALPHA"])) # way better results with lower alpha & higher iterations
+W1, W2, b1, b2 = gradient_descent(X_train, Y_train, read_config()["ITERATIONS"], read_config()["ALPHA"])
 
 # Test
 def make_predictions(X, W1, W2, b1, b2):
